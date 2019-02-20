@@ -1,0 +1,10 @@
+{
+	"appJs" : [
+		"../vendor/components/jquery/jquery.js",
+		"./js/main.js"
+	],
+	
+	"copyAssets" : [
+	]
+	
+}

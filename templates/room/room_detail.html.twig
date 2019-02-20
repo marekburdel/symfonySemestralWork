@@ -1,0 +1,74 @@
+{% extends '/base.html.twig' %}
+
+{% block body %}
+    <div class="main">
+    <h1 class="name">{{ room.name }}</h1>
+    {% if can %}
+    <section class="edit">
+        <br><a href="{{ path('room_edit', { id : room.id}) }}">Edit room.</a>
+    </section>
+    {% endif %}
+    <section class="detail">
+        <dl>
+            <dt>
+                admins:
+            </dt>
+            <dd>
+                <ul>
+                    {% if room.admins is empty %}
+                        <li>none</li>
+                    {% else %}
+                        {% for admin in room.admins %}
+                            <li>
+                                <a href="{{ path('user_detail', { id: admin.id}) }}">
+                                    {{ admin.username }} - {{ admin.name }} {{ admin.surname }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt>
+                users:
+            </dt>
+            <dd>
+                <ul>
+                    {% if room.users is empty %}
+                        <li>none</li>
+                    {% else %}
+                        {% for user in room.users %}
+                            <li>
+                                <a href="{{ path('user_detail', { id: user.id}) }}">
+                                    {{ user.username }} - {{ user.name }} {{ user.surname }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </dd>
+        </dl>
+
+        <div class="detail__actions detail__actions--room">
+            {% if can %}
+            <a class="btn btn--edit" href="{{ path('room_users', {id: room.id}) }}">
+                edit users
+            </a>
+            <a class="btn btn--edit" href="{{ path('room_admins', {id: room.id}) }}">
+                edit admins
+            </a>
+            <a class="btn room__reservation" href="{{ path( 'reservation_create', { roomId : room.id}) }}">Create
+                reservation</a>
+            {% endif %}
+            {% if canshowres %}
+            <a class="btn room__reservations" href="{{ path( 'reservation_room_list', { id : room.id}) }}">List of
+                reservations</a>
+            {% endif %}
+        </div>
+    </section>
+
+
+
+{% endblock %}

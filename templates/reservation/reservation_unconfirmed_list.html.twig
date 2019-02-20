@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="main">
+
+        <h1>Unconfirmed reservations</h1>
+        <section class="list list__reservations">
+
+            <ul>
+                {% set counter = 0 %}
+        {% for reservation in reservations %}
+            {% if reservation.confirmed == false %}
+                {% set counter = counter+1 %}
+                <li>
+                <div>
+                    <a href="{{ path('room_detail', {id:reservation.getReservationRoom().getId()}) }}">
+                        {{ reservation.getReservationRoom().getName() }}
+                    </a>
+                    <a href="{{ path('user_detail' , { id: reservation.getUserInitiator().getId() }) }}">
+                        {{ reservation.getUserInitiator().username }} - {{ reservation.getUserInitiator().name }} {{ reservation.getUserInitiator().surname }}
+                    </a>
+                    {{  reservation.getFromdate() | date  }} - {{  reservation.getTodate() | date }}
+                </div>
+                <div class="list__actions">
+                    <a class="list__reservation" href="{{ path( 'reservation_edit', { roomId : reservation.getReservationRoom().id, id:reservation.getId() }) }}"> EDIT </a>
+                <a class="list__delete" href="{{ path( 'reservation_delete', { roomId : reservation.getReservationRoom().id, id:reservation.getId() }) }}">DELETE</a>
+                </div>
+            {% endif %}
+            </li>
+        {% endfor %}
+                {% if counter == 0 %}
+            <li>No unconfirmed reservations.</li>
+                {% endif %}
+            </ul>
+        </section>
+
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="main">
+
+        <h1>{{ room.name }} reservations</h1>
+        <section class="create__new create__new--reservation">
+            <a href="{{ path( 'reservation_create', { roomId : room.id}) }}">Create new reservation.</a>
+        </section>
+        <section class="list list__reservations">
+
+            <ul>
+        {% for reservation in reservations %}
+            <li id="list__delete--reservation{{ reservation.getId()}}">
+                <div>
+                    <a href="{{ path('user_detail' , { id: reservation.getUserInitiator().getId() }) }}">
+                        {{ reservation.getUserInitiator().username }} - {{ reservation.getUserInitiator().name }} {{ reservation.getUserInitiator().surname }}
+                    </a>,
+                    {{  reservation.getFromdate() | date  }}
+                    -
+                    {{  reservation.getTodate() | date }},
+                    {% if reservation.getConfirmed() == 1 %}
+                        Confirmed
+                    {% else %}
+                        Not Confirmed
+                    {% endif %}
+                </div>
+                <div class="list__actions">
+                    <a class="list__reservation" href="{{ path( 'reservation_edit', { roomId : room.id, id:reservation.getId() }) }}"> EDIT </a>
+                    <a  class="list__delete list__delete--reservation" data-reservationid="{{ reservation.getId()}}" data-roomid="{{ room.id}}" href="{{ path( 'reservation_delete', { roomId : room.id, id:reservation.getId() }) }}">DELETE</a>
+                </div>
+            </li>
+        {% else %}
+            <p class="warning">No reservations.</p>
+        {% endfor %}
+            </ul>
+        </section>
+
+
+
+    </div>
+
+{% endblock %}

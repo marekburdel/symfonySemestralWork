@@ -1,0 +1,41 @@
+{% extends '/base.html.twig' %}
+
+{% block body %}
+    <div class="main">
+        <h1>Rooms</h1>
+        {% if can %}
+        <section class="create__new create__new--room">
+            <a href="{{ path( 'room_create') }}">Create new room.</a>
+        </section>
+        {% endif %}
+        <section class="list list__rooms">
+
+            {% if rooms is empty %}
+                <p class="warning">No rooms.</p>
+            {% else %}
+                <ul>
+                    {% for room in rooms %}
+                        <li>
+                            <span class="list__item__name"> {{ room.getName() }} </span>
+                            <div class="list__actions">
+                                <a class="list__detail" href="{{ path( 'room_detail', { id : room.id}) }}">Detail</a>
+                                {% if (sign != null and room.isAdminOfRoom(sign)) or can %}
+                                <a class="list__edit" href="{{ path( 'room_edit', { id : room.id}) }}">Edit</a>
+                                {% endif %}
+                                {% if canshowres %}
+                                <a class="list__reservation"
+                                   href="{{ path( 'reservation_create', { roomId : room.id}) }}">Create reservation</a>
+                                <a class="list__reservations"
+                                   href="{{ path( 'reservation_room_list', { id : room.id}) }}">List of reservations</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </section>
+
+
+    </div>
+
+{% endblock %}

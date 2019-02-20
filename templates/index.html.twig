@@ -1,0 +1,17 @@
+{% extends '/base.html.twig' %}
+
+
+
+{% block body %}
+    <div class="main">
+        <h1>Welcome to <span class="pagename">Tamagochi</span></h1>
+        <p class="subtitle">Your Smart Room administration service</p>
+        <section class="login">
+            {% if not app.user %}
+                <h2>Please <a href="{{ path( 'app_login' ) }}">Sign in</a> to continue</h2>
+            {% else %}
+
+            {% endif %}
+        </section>
+    </div>
+{% endblock %}

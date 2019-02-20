@@ -1,0 +1,95 @@
+button,
+.btn {
+  margin-top: 10px;
+  padding: 15px 25px;
+  background-color: $color_2;
+  color: $color_5;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  &:hover {
+    background-color: $color_4;
+  }
+  display: inline-block;
+  text-decoration: none;
+}
+
+
+.btn--back {
+  padding-left: 40px;
+  position: absolute;
+  background-color: transparent;
+  border: 1px solid $color_7;
+  color: $color_1;
+  margin-top: 0;
+
+  &:hover {
+    text-decoration: none;
+    color: $color_5;
+    &:before {
+      background-image: url("/images/back--white.svg");
+    }
+  }
+  &:before {
+    left: 5px;
+    position: absolute;
+    width: 18px;
+    height: 26px;
+    top: calc( 50% - 13px);
+    content: '';
+    background-image: url("/images/back.svg");
+    background-size: 18px 26px;
+  }
+}
+
+.btn--active {
+  background-color: $color_7;
+}
+.btn--edit {
+  position: relative;
+  padding-left: 35px;
+  &:before {
+    position: absolute;
+    left: 10px;
+    top: calc( 50% - 7px);
+    width: 16px;
+    content: '';
+    height: 16px;
+    background: url("/images/edit--white.svg") no-repeat;
+    background-size: 16px;
+  }
+}
+
+
+.order {
+  padding: 5px 20px 5px 5px;
+  border: 1px solid $color_7;
+  position: relative;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  &:after {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 5px 0 5px;
+    border-color: #972a7a transparent transparent transparent;
+    position: absolute;
+    content: '';
+    right: 5px;
+    top: calc( 50% - 5px);
+    transition-duration: 0.3s;
+  }
+  &.order__desc {
+    &:after  {
+      transform: rotate(180deg);
+    }
+  }
+  &:hover {
+    background-color: $color_7;
+    color: $color_5;
+    &:after {
+      border-color: $color_5 transparent transparent transparent;
+    }
+  }
+}

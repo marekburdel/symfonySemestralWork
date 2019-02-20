@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="main">
+        <h1>Groups</h1>
+        {% if can %}
+        <section class="create__new create__new--group">
+            <a href="{{ path( 'group_create') }}">Create new group.</a>
+        </section>
+        {% endif %}
+        <section class="list list__groups">
+
+            <ul>
+                {% for group in groups %}
+                    <li>
+                        <span class="list__item__name"> {{ group.name }} </span>
+                        <div class="list__actions">
+                            <a class="list__detail" href="{{ path('group_detail' , { id: group.id }) }}">Detail</a>
+                            {% if (sign != null and group.isAdminOfGroup(sign)) or can %}
+                            <a class="list__edit" href="{{ path( 'group_edit', { id : group.id}) }}">Edit</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% else %}
+                    <p class="warning">No groups.</p>
+                {% endfor %}
+            </ul>
+        </section>
+
+    </div>
+
+{% endblock %}

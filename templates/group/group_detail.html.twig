@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="main">
+        <h1 class="name">{{ group.name }}</h1>
+        {% if can %}
+            <section class="edit edit--group">
+                <a href="{{ path( 'group_edit', {id : group.getId()}) }}">Edit group.</a>
+            </section>
+        {% endif %}
+
+        <section class="detail detail--group">
+            <div class="detail__actions detail__actions--group">
+                <a class="btn btn--active btn--tab" data-type="members" href="javascript:void(0)">Members</a>
+                <a class="btn btn--tab" data-type="rooms" href="javascript:void(0)">Rooms</a>
+                <a class="btn btn--tab" data-type="admins" href="javascript:void(0)">Admins</a>
+            </div>
+            <section class="detail__subsection" id="members">
+
+                {% if group.members is empty %}
+                    <p class="warning">none</p>
+                {% else %}
+                    <ul>
+                        {% for member in group.members %}
+                            <li>
+                                <a href="{{ path('user_detail', { id: member.id}) }}">
+                                    {{ member.username }} - {{ member.name }} {{ member.surname }}
+                                </a>
+                                <div class="list__actions">
+                                    <a class="list__detail" href="{{ path('user_detail', { id: member.id}) }}">
+                                        detail
+                                    </a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if can %}
+                    <a class="edit" href="{{ path('group_members', {id: group.id}) }}">
+                        edit members
+                    </a>
+                {% endif %}
+            </section>
+            <section class="detail__subsection" id="admins" style="display: none">
+                <div>
+
+                    {% if group.admins is empty %}
+                        <p class="warning">none</p>
+                    {% else %}
+                        <ul>
+                            {% for admin in group.admins %}
+                                <li>
+                                    <a href="{{ path('user_detail', { id: admin.id}) }}">
+                                        {{ admin.username }} - {{ admin.name }} {{ admin.surname }}
+                                    </a>
+                                    <div class="list__actions">
+                                        <a class="list__detail" href="{{ path('user_detail', { id: admin.id}) }}">
+                                            detail
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    {% if can %}
+                        <a class="edit" href="{{ path('group_admins', {id: group.id}) }}">
+                            edit admins
+                        </a>
+                    {% endif %}
+                </div>
+            </section>
+            <section class="detail__subsection" id="rooms" style="display: none">
+                <div>
+
+                    {% if group.rooms is empty %}
+                        <p class="warning">none</p>
+                    {% else %}
+                        <ul>
+                            {% for room in group.rooms %}
+                                <li>
+                                    <a href="{{ path('room_detail', { id: room.id}) }}">
+                                        {{ room.name }}
+                                    </a>
+                                    <div class="list__actions">
+                                        <a class="list__detail" href="{{ path('room_detail', { id: room.id}) }}">
+                                            detail
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    {% if can %}
+                        <a class="edit" href="{{ path('group_rooms', {id: group.id}) }}">
+                            edit rooms
+                        </a>
+                    {% endif %}
+                </div>
+            </section>
+
+        </section>
+    </div>
+{% endblock %}

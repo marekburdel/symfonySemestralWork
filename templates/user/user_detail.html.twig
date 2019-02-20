@@ -1,0 +1,61 @@
+{% extends '/base.html.twig' %}
+
+{% block body %}
+    <div class="main">
+        {% if  app.user and app.user.id == user.id %}
+            <h1>My profile</h1>
+        {% else %}
+            <h1>{{ user.username }} profile</h1>
+        {% endif %}
+
+        <section class="edit edit--user">
+            <a href="{{ path('user_edit', { id : user.id}) }}">Edit user</a>
+        </section>
+
+        <section class="detail">
+            <dl>
+                <dt>Username:</dt>
+                <dd>{{ user.username }}</dd>
+            </dl>
+
+            <dl>
+                <dt>Full Name:</dt>
+                <dd>{{ user.name }} {{ user.surname }}</dd>
+            </dl>
+            <dl>
+                <dt>User roles:</dt>
+                {% for role in user.roles %}
+                    <dd>{{ role }}</dd>
+                {% endfor %}
+            </dl>
+            <dl>
+                <dt>Email address:</dt>
+                <dd><a href="mailto:{{ user.email }}">{{ user.email }}</a></dd>
+            </dl>
+            <div class="detail__actions detail__actions--user">
+                <a class="btn btn--rooms" href="{{ path('user_rooms', {id: user.id}) }}">
+                    rooms user/admin
+                </a>
+
+
+                <a class="btn btn--groups" href="{{ path('user_groups', {id: user.id}) }}">
+                    groups member/admin
+                </a>
+
+
+                <a class="btn btn--reservations" href="{{ path('user_reservations', {id: user.id}) }}">
+                    reservations
+                </a>
+
+                {% if canshowunconfirmedres %}
+                    <a class="btn btn--reservations" href="{{ path('unconfirmed_reservations') }}">
+                        unconfirmed reservations
+                    </a>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+
+
+
+{% endblock %}

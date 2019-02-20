@@ -1,0 +1,34 @@
+
+
+
+
+.room__create {
+  text-align: center;
+  font-size: 1.4rem;
+  a {
+    text-decoration: none;
+    position: relative;
+    padding-left: 40px;
+    color: $color_7;
+    &:hover {
+      text-decoration: underline;
+      &:before {
+        transform: rotate(90deg);
+      }
+    }
+    &:before {
+      position: absolute;
+      left: 5px;
+      width: 20px;
+      content: '';
+      height: 20px;
+      background-repeat: no-repeat;
+      background-image: url("/images/plus-purple.svg");
+      background-size: 20px;
+      top: calc(50% - 10px);
+      transition-duration: 0.5s;
+    }
+  }
+}
+
+

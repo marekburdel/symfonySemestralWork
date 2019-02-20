@@ -1,0 +1,33 @@
+h1{
+  margin-top: 40px;
+  font-size: 34px;
+  font-weight: 200;
+
+
+
+  &.style_color_1 {
+    color: $color_5;
+  }
+  &.style_color_2 {
+    color: $color_1;
+  }
+  &.style_color_3 {
+    color: $color_4;
+  }
+}
+h2 {
+  margin-top: 40px;
+  font-size: 34px;
+  font-weight: 200;
+
+
+  &.style_color_1 {
+    color: $color_5;
+  }
+  &.style_color_2 {
+    color: $color_1;
+  }
+  &.style_color_3 {
+    color: $color_4;
+  }
+}

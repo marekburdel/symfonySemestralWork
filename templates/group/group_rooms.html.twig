@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="main">
+    <section class="headline">
+        <a class="btn btn--back" href="{{ path('group_detail' , { id: group.id }) }}">Back</a>
+        <h1>group {{ group.name }}</h1>
+    </section>
+    <section class="create__new add__new--member">
+        <a href="{{ path( 'group_rooms_add_list', {id: group.id}) }}">Add new room to group.</a>
+    </section>
+    <section class="list list__rooms">
+        <h1>Rooms:</h1>
+
+        {% if group.rooms is empty %}
+            <p class="warning"> none</p>
+        {% else %}
+            <ul>
+                {% for room in group.rooms %}
+                    <li>
+                        <a class="name" href="{{ path('room_detail', { id: room.id}) }}">
+                            {{ room.name }}
+                        </a>
+                        <div class="list__actions">
+                            <a class="list__delete"
+                               href="{{ path('group_room_delete', {id: group.id, roomId: room.id}) }}">
+                                DELETE
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </section>
+{% endblock %}

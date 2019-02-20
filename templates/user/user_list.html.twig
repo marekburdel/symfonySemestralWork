@@ -1,0 +1,32 @@
+{% extends '/base.html.twig' %}
+
+{% block body %}
+    <div class="main">
+        <h1>Users</h1>
+        <section class="create__new create__new--user">
+            <a href="{{ path( 'user_create') }}">Create new user.</a>
+        </section>
+        <section class="list list__users">
+
+            {% if users is empty %}
+                <p class="warning">No users.</p>
+            {% else %}
+                <ul>
+                    {% for user in users %}
+                        <li>
+                            <span id="list__user__name__{{ user.id }}" class="list__item__name list__user__name" data-id="{{ user.id }}"> {{ user.getUsername() }} </span>
+                            <div class="list__actions">
+                                <a class="list__detail" href="{{ path('user_detail' , { id: user.id }) }}">Detail</a>
+                                {% if can or (sign!=null and sign.id==user.id) %}
+                                <a class="list__edit" href="{{ path( 'user_edit', { id : user.id}) }}">Edit</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </section>
+
+    </div>
+
+{% endblock %}

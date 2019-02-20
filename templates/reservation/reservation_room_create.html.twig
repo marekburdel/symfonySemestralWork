@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'form/edit.html.twig' %}
+
+{% block body %}
+    <div class="main">
+        {{ form_start(form) }}
+        <h1> Reservation for room {{ room.getName() }}</h1>
+        {{ form_widget(form) }}
+        <button type="submit">Submit</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

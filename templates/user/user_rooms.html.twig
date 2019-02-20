@@ -1,0 +1,58 @@
+{% extends '/base.html.twig' %}
+
+{% block body %}
+    <div class="main">
+        <section class="headline">
+            <a class="btn btn--back" href="{{ path('user_detail' , { id: user.id }) }}">Back to user profile</a>
+            {% if  app.user and app.user.id == user.id %}
+                <h1>My rooms</h1>
+            {% else %}
+                <h1>rooms of {{ user.username }}</h1>
+                <div class="subtitle">
+                    <dl>
+                        <dt>Jméno:</dt>
+                        <dd>{{ user.name }} {{ user.surname }}</dd>
+                    </dl>
+                </div>
+            {% endif %}
+        </section>
+        <section class="list list__rooms__member list--link">
+            <h2>room member:</h2>
+
+            {% if user.rooms_user is empty %}
+                <p class="warning">none</p>
+            {% else %}
+                <ul>
+                    {% for room in user.rooms_user %}
+                        <li>
+                            <a href="{{ path('room_detail', { id: room.id}) }}">
+                                {{ room.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </section>
+        <section class="list list__rooms__admin list--link">
+            <h2>room admin:</h2>
+
+            {% if user.rooms_admin is empty %}
+                <p class="warning">none</p>
+            {% else %}
+                <ul>
+                    {% for room in user.rooms_admin %}
+                        <li>
+                            <a href="{{ path('room_detail', { id: room.id}) }}">
+                                {{ room.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+
+        </section>
+    </div>
+
+
+{% endblock %}

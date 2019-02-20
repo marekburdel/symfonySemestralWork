@@ -1,0 +1,28 @@
+.detail--group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.detail__subsection {
+  flex-basis: 100%;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    li {
+      &:before{
+        content: none;
+      }
+      background-image: linear-gradient(to right, rgba(0, 255, 255, 0.32), rgba(255, 240, 245, 0.31));
+      padding: 20px;
+      &:nth-child(even) {
+        background-image: linear-gradient(to right, rgba(255, 240, 245, 0.31), rgba(0, 255, 255, 0.32));
+      }
+      &:not(last-child) {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+      }
+      display: flex;
+      justify-content: space-between;
+
+    }
+  }
+}
